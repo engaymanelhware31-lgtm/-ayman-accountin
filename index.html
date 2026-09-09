@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ayman Accounting 1.3</title>
-<meta name="description" content="نظام محاسبي عربي لإدارة المشاريع والعملاء والدفعات">
+<title>Ayman Accounting 1.4</title>
 
 <style>
 *{box-sizing:border-box}
@@ -15,8 +14,6 @@ background:#f5f7fa;
 color:#17212b;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif
 }
-
-.layout{min-height:100vh}
 
 .sidebar{
 position:fixed;
@@ -44,19 +41,18 @@ font-size:12px;
 margin-top:7px
 }
 
-.sidebar nav a{
+.sidebar a{
 display:block;
 color:#dce4ea;
 text-decoration:none;
-padding:12px 13px;
+padding:12px;
 border-radius:9px;
 margin:3px 0
 }
 
-.sidebar nav a:hover,
-.sidebar nav a.active{
-background:#2a3948;
-color:#fff
+.sidebar a:hover,
+.sidebar a.active{
+background:#2a3948
 }
 
 .main{
@@ -65,54 +61,46 @@ padding:24px;
 min-height:100vh
 }
 
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
+.topbar,
+.panel,
+.card{
 background:#fff;
 border-radius:14px;
-padding:16px 20px;
-margin-bottom:18px;
 box-shadow:0 2px 10px #0000000a
 }
 
-.muted{
+.topbar{
+display:flex;
+justify-content:space-between;
+padding:16px 20px;
+margin-bottom:18px
+}
+
+.muted,
+.label{
 font-size:12px;
-color:#74808c;
-margin-top:4px
+color:#74808c
 }
 
-.currency{
-background:#eef7ff;
-padding:8px 12px;
-border-radius:20px
+.title{
+margin:8px 0 18px
 }
-
-.title{margin:8px 0 18px}
 
 .cards{
 display:grid;
-grid-template-columns:repeat(4,1fr);
+grid-template-columns:repeat(3,1fr);
 gap:14px
 }
 
 .card,
 .panel{
-background:#fff;
-border-radius:14px;
-padding:18px;
-box-shadow:0 2px 10px #0000000a
-}
-
-.label{
-font-size:13px;
-color:#687581
+padding:18px
 }
 
 .value{
 font-size:24px;
 font-weight:800;
-margin-top:9px
+margin-top:8px
 }
 
 .grid{
@@ -134,9 +122,7 @@ border-radius:9px;
 padding:11px 15px;
 cursor:pointer;
 background:#1769aa;
-color:#fff;
-text-decoration:none;
-display:inline-block
+color:#fff
 }
 
 .btn.secondary{
@@ -144,8 +130,9 @@ background:#e9eef3;
 color:#26333e
 }
 
-.btn.success{background:#218739}
-.btn.danger{background:#b42318}
+.btn.danger{
+background:#b42318
+}
 
 .form{
 display:grid;
@@ -153,8 +140,9 @@ grid-template-columns:repeat(2,1fr);
 gap:12px
 }
 
-.form.three{grid-template-columns:repeat(3,1fr)}
-.form.four{grid-template-columns:repeat(4,1fr)}
+.form.three{
+grid-template-columns:repeat(3,1fr)
+}
 
 .field label{
 display:block;
@@ -172,13 +160,9 @@ border-radius:8px;
 background:#fff
 }
 
-.field input:focus,
-.field select:focus{
-outline:2px solid #b8dcf4;
-border-color:#1769aa
+.table-wrap{
+overflow:auto
 }
-
-.table-wrap{overflow:auto}
 
 table{
 width:100%;
@@ -188,7 +172,7 @@ border-collapse:collapse
 th,
 td{
 text-align:right;
-padding:11px 8px;
+padding:10px 8px;
 border-bottom:1px solid #edf0f2;
 white-space:nowrap
 }
@@ -199,19 +183,14 @@ color:#66737f
 }
 
 .empty{
-padding:25px;
 text-align:center;
+padding:25px;
 color:#7b8792
 }
 
-.alert{
-padding:12px;
-border-radius:9px;
-background:#fff4d6;
-margin-bottom:14px
+.suggest{
+position:relative
 }
-
-.suggest{position:relative}
 
 .suggestions{
 position:absolute;
@@ -223,7 +202,7 @@ background:#fff;
 border:1px solid #d7dee5;
 border-radius:8px;
 box-shadow:0 8px 25px #0002;
-max-height:220px;
+max-height:230px;
 overflow:auto
 }
 
@@ -237,13 +216,14 @@ border-bottom:1px solid #eee
 background:#eef7ff
 }
 
-.subtle{
-font-size:12px;
-color:#74808c
+.project-box{
+background:#f8fbff;
+border:1px solid #dfeaf4;
+border-radius:12px;
+padding:14px;
+margin-top:14px;
+line-height:1.9
 }
-
-.status-yes{font-weight:700}
-.status-no{font-weight:700}
 
 .totals{
 display:flex;
@@ -252,7 +232,7 @@ flex-wrap:wrap;
 margin-top:16px
 }
 
-.totals .mini{
+.mini{
 background:#f7f9fb;
 border:1px solid #e5e9ed;
 border-radius:10px;
@@ -266,23 +246,13 @@ font-size:18px;
 margin-top:4px
 }
 
-.project-box{
-background:#f8fbff;
-border:1px solid #dfeaf4;
-border-radius:12px;
-padding:14px;
-margin-top:14px
-}
-
-.installment-row{
+.installment{
 display:grid;
-grid-template-columns:1.2fr 1fr 1fr 1fr auto;
+grid-template-columns:1fr 1fr 1fr 1fr auto;
 gap:8px;
 align-items:end;
 margin-bottom:8px
 }
-
-.print-only{display:none}
 
 @media(max-width:850px){
 
@@ -296,14 +266,16 @@ font-size:0;
 text-align:center
 }
 
-.brand small{font-size:0}
+.brand small{
+display:none
+}
 
-.sidebar nav a{
+.sidebar a{
 font-size:0;
 text-align:center
 }
 
-.sidebar nav a:first-letter{
+.sidebar a:first-letter{
 font-size:20px
 }
 
@@ -312,22 +284,14 @@ margin-right:72px;
 padding:14px
 }
 
-.cards{
-grid-template-columns:repeat(2,1fr)
-}
-
+.cards,
 .grid,
 .form,
-.form.three,
-.form.four{
+.form.three{
 grid-template-columns:1fr
 }
 
-.topbar{padding:13px}
-
-.value{font-size:20px}
-
-.installment-row{
+.installment{
 grid-template-columns:1fr
 }
 
@@ -335,7 +299,9 @@ grid-template-columns:1fr
 
 @media print{
 
-body{background:#fff}
+body{
+background:#fff
+}
 
 .sidebar,
 .topbar,
@@ -348,18 +314,10 @@ margin:0;
 padding:0
 }
 
-.print-only{
-display:block
-}
-
 .panel,
 .card{
 box-shadow:none;
 border:1px solid #ddd
-}
-
-.title{
-font-size:22px
 }
 
 }
@@ -368,8 +326,6 @@ font-size:22px
 
 <body>
 
-<div class="layout">
-
 <aside class="sidebar">
 
 <div class="brand">
@@ -377,45 +333,29 @@ Ayman <span>Accounting</span>
 <small>نظام محاسبي</small>
 </div>
 
-<nav id="nav">
+<nav>
 
-<a href="#dashboard" data-route="dashboard">
+<a href="#dashboard" data-r="dashboard">
 🏠 الرئيسية
 </a>
 
-<a href="#sales" data-route="sales">
-🧾 المبيعات
-</a>
-
-<a href="#purchases" data-route="purchases">
-🛒 المشتريات
-</a>
-
-<a href="#receipts" data-route="receipts">
-💰 سند قبض
-</a>
-
-<a href="#payments" data-route="payments">
-💸 سند صرف
-</a>
-
-<a href="#customers" data-route="customers">
+<a href="#customers" data-r="customers">
 👥 العملاء
 </a>
 
-<a href="#suppliers" data-route="suppliers">
-🏢 الموردون
+<a href="#receipts" data-r="receipts">
+💰 سند قبض
 </a>
 
-<a href="#accounts" data-route="accounts">
-📒 دليل الحسابات
+<a href="#payments" data-r="payments">
+💸 سند صرف
 </a>
 
-<a href="#journal" data-route="journal">
+<a href="#journal" data-r="journal">
 📓 القيود اليومية
 </a>
 
-<a href="#reports" data-route="reports">
+<a href="#reports" data-r="reports">
 📊 التقارير
 </a>
 
@@ -428,13 +368,16 @@ Ayman <span>Accounting</span>
 <header class="topbar">
 
 <div>
-<strong>Ayman Accounting</strong>
+
+<b>Ayman Accounting</b>
+
 <div class="muted">
-الإصدار 1.3 — نسخة تجريبية
-</div>
+الإصدار 1.4 — نسخة اختبار
 </div>
 
-<span class="currency">د.ك</span>
+</div>
+
+<b>د.ك</b>
 
 </header>
 
@@ -442,59 +385,128 @@ Ayman <span>Accounting</span>
 
 </main>
 
-</div>
 
 <script>
 
-const KEY="aymanAccounting_v13";
-const oldKey="aymanAccounting_v12";
+const KEY="ayman_accounting_v14";
 
-const defaults={
-ops:[],
+const oldKeys=[
+"aymanAccounting_v13",
+"aymanAccounting_v12"
+];
+
+
+function fresh(){
+
+return{
+
 customers:[],
-suppliers:[]
-};
+suppliers:[],
+receipts:[],
+payments:[],
+ops:[],
+receiptSeq:{},
+paymentSeq:{}
+
+}
+
+}
+
 
 function load(){
 
-let raw=localStorage.getItem(KEY);
+for(
+const k of [KEY,...oldKeys]
+){
 
-if(raw)
-return JSON.parse(raw);
+const s=localStorage.getItem(k);
 
-let old=localStorage.getItem(oldKey);
+if(s){
 
-if(old){
+try{
 
-let d=JSON.parse(old);
+const d=JSON.parse(s);
 
-d.customers=(d.customers||[]).map(c=>({
+const x={
+...fresh(),
+...d
+};
+
+x.receipts=x.receipts||[];
+x.payments=x.payments||[];
+x.receiptSeq=x.receiptSeq||{};
+x.paymentSeq=x.paymentSeq||{};
+
+x.customers=
+(x.customers||[])
+.map(c=>({
+
 ...c,
-projectAddress:c.projectAddress||"",
-projectValue:Number(c.projectValue||0),
-installments:c.installments||[]
+
+projectAddress:
+c.projectAddress||
+c.address||
+"",
+
+projectValue:
+Number(c.projectValue||0),
+
+installments:
+c.installments||[]
+
 }));
 
-return d
+return x
+
+}catch(e){}
+
 }
 
-return structuredClone(defaults)
+}
+
+return fresh()
 
 }
+
 
 let db=load();
 
+
 function save(){
 
-localStorage.setItem(KEY,JSON.stringify(db));
+localStorage.setItem(
+KEY,
+JSON.stringify(db)
+);
 
 render()
 
 }
 
+
+function esc(s){
+
+return String(s??"")
+.replace(
+/[&<>"']/g,
+c=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[c])
+)
+
+}
+
+
 function money(v){
 
-return Number(v||0).toLocaleString(
+return Number(v||0)
+.toLocaleString(
 "ar-KW",
 {
 minimumFractionDigits:3,
@@ -504,90 +516,135 @@ maximumFractionDigits:3
 
 }
 
+
+function today(){
+
+return new Date()
+.toISOString()
+.slice(0,10)
+
+}
+
+
+function year(){
+
+return new Date()
+.getFullYear()
+
+}
+
+
 function route(){
 
-return location.hash.replace("#","")||"dashboard"
+return location.hash.slice(1)||"dashboard"
 
 }
 
-function setActive(){
 
-document
-.querySelectorAll("#nav a")
-.forEach(a=>
-a.classList.toggle(
-"active",
-a.dataset.route===route()
-)
+function projectValue(){
+
+return db.customers.reduce(
+(a,c)=>
+a+Number(c.projectValue||0),
+0
 )
 
 }
 
-function page(title,body){
 
-return `
+function customerPaid(name){
+
+return db.receipts
+.filter(
+r=>r.customer===name
+)
+.reduce(
+(a,r)=>
+a+Number(r.amount||0),
+0
+)
+
+}
+
+
+function paidTotal(){
+
+return db.receipts.reduce(
+(a,r)=>
+a+Number(r.amount||0),
+0
+)
+
+}
+
+
+function remainingTotal(){
+
+return projectValue()-paidTotal()
+
+}
+
+
+function nextNo(type,y=year()){
+
+const key=String(y);
+
+const seq=
+type==="receipt"
+?
+db.receiptSeq
+:
+db.paymentSeq;
+
+seq[key]=
+Number(seq[key]||0)+1;
+
+return seq[key]
+
+}
+
+
+function shell(title,html){
+
+return`
+
 <section>
-<h1 class="title">${title}</h1>
-${body}
+
+<h1 class="title">
+${title}
+</h1>
+
+${html}
+
 </section>
+
 `
 
 }
 
-function projectTotal(){
-
-return db.customers.reduce(
-(a,c)=>a+Number(c.projectValue||0),
-0
-)
-
-}
-
-function paidTotal(){
-
-return db.customers.reduce(
-(a,c)=>
-a+
-(c.installments||[])
-.filter(i=>i.paid)
-.reduce(
-(x,i)=>x+Number(i.amount||0),
-0
-),
-0
-)
-
-}
-
-function remainingTotal(){
-
-return projectTotal()-paidTotal()
-
-}
-
-function dueInstallments(){
-
-return db.customers
-.flatMap(c=>
-(c.installments||[])
-.map(i=>({
-...i,
-customer:c.name,
-project:c.projectAddress||""
-}))
-)
-.filter(i=>!i.paid)
-
-}
 
 function dashboard(){
 
-let s=sum("sale"),
-p=sum("purchase"),
-r=sum("receipt"),
-x=sum("payment");
+const due=
+db.customers
+.flatMap(
+c=>
+(c.installments||[])
+.filter(i=>!i.paid)
+.map(i=>({
 
-return page(
+...i,
+
+customer:c.name,
+
+project:
+c.projectAddress||""
+
+}))
+
+);
+
+return shell(
 "لوحة التحكم",
 
 `
@@ -601,7 +658,7 @@ return page(
 </div>
 
 <div class="value">
-${money(projectTotal())}
+${money(projectValue())}
 </div>
 
 </div>
@@ -632,15 +689,1324 @@ ${money(remainingTotal())}
 
 </div>
 
+</div>
+
+
+<div
+class="cards"
+style="margin-top:14px"
+>
 
 <div class="card">
 
 <div class="label">
-عدد المشاريع
+عدد العملاء / المشاريع
 </div>
 
 <div class="value">
 ${db.customers.length}
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="label">
+سندات القبض
+</div>
+
+<div class="value">
+${db.receipts.length}
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="label">
+سندات الصرف
+</div>
+
+<div class="value">
+${db.payments.length}
+</div>
+
+</div>
+
+</div>
+
+
+<div class="grid">
+
+<div class="panel">
+
+<h3>
+آخر سندات القبض
+</h3>
+
+${receiptTable(
+db.receipts
+.slice()
+.reverse()
+.slice(0,8)
+)}
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+الدفعات غير المصروفة
+</h3>
+
+${installmentTable(
+due.slice(0,8)
+)}
+
+</div>
+
+</div>
+
+`
+
+)
+
+}
+
+
+function customers(){
+
+return shell(
+"العملاء والمشروعات",
+
+`
+
+<div class="panel">
+
+<div class="form three">
+
+<div class="field">
+
+<label>
+اسم العميل
+</label>
+
+<input id="cname">
+
+</div>
+
+
+<div class="field">
+
+<label>
+عنوان المشروع
+</label>
+
+<input id="caddress">
+
+</div>
+
+
+<div class="field">
+
+<label>
+قيمة المشروع
+</label>
+
+<input
+id="cvalue"
+type="number"
+min="0"
+step="0.001"
+>
+
+</div>
+
+</div>
+
+
+<div
+class="actions no-print"
+style="margin-top:14px"
+>
+
+<button
+class="btn"
+onclick="addCustomer()"
+>
+
+إضافة العميل والمشروع
+
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="panel"
+style="margin-top:16px"
+>
+
+${customerTable()}
+
+</div>
+
+`
+
+)
+
+}
+
+
+function customerTable(){
+
+if(!db.customers.length)
+
+return`
+
+<div class="empty">
+لا توجد عملاء مسجلون
+</div>
+
+`;
+
+return`
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>اسم العميل</th>
+<th>عنوان المشروع</th>
+<th>قيمة المشروع</th>
+<th>المدفوع</th>
+<th>المتبقي</th>
+<th>الدفعات</th>
+<th>إجراء</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+
+db.customers
+.map(
+(c,i)=>{
+
+const paid=
+customerPaid(c.name);
+
+const rem=
+Number(c.projectValue||0)-paid;
+
+return`
+
+<tr>
+
+<td>
+${esc(c.name)}
+</td>
+
+<td>
+${esc(c.projectAddress)}
+</td>
+
+<td>
+${money(c.projectValue)}
+</td>
+
+<td>
+${money(paid)}
+</td>
+
+<td>
+${money(rem)}
+</td>
+
+<td>
+${(c.installments||[]).length}
+</td>
+
+<td>
+
+<button
+class="btn secondary"
+onclick="openCustomer(${i})"
+>
+
+إدارة الدفعات
+
+</button>
+
+</td>
+
+</tr>
+
+`
+
+}
+)
+.join("")
+
+}
+
+</tbody>
+
+</table>
+
+</div>
+
+`
+
+}
+
+
+function addCustomer(){
+
+const name=
+document
+.getElementById("cname")
+.value
+.trim();
+
+const address=
+document
+.getElementById("caddress")
+.value
+.trim();
+
+const value=
+Number(
+document
+.getElementById("cvalue")
+.value||0
+);
+
+if(
+!name||
+!address||
+value<=0
+)
+
+return alert(
+"أدخل اسم العميل وعنوان المشروع وقيمة المشروع"
+);
+
+if(
+db.customers.some(
+c=>c.name===name
+)
+)
+
+return alert(
+"العميل مسجل بالفعل"
+);
+
+db.customers.push({
+
+name,
+
+projectAddress:address,
+
+projectValue:value,
+
+installments:[]
+
+});
+
+save();
+
+alert(
+"تمت إضافة العميل والمشروع"
+)
+
+}
+
+
+function openCustomer(i){
+
+const c=db.customers[i];
+
+document.getElementById("app")
+.innerHTML=
+
+shell(
+"دفعات المشروع",
+
+`
+
+<div class="panel">
+
+<div class="project-box">
+
+<b>
+العميل:
+</b>
+
+${esc(c.name)}
+
+<br>
+
+<b>
+المشروع:
+</b>
+
+${esc(c.projectAddress)}
+
+<br>
+
+<b>
+قيمة المشروع:
+</b>
+
+${money(c.projectValue)}
+
+<br>
+
+<b>
+المدفوع بسندات القبض:
+</b>
+
+${money(customerPaid(c.name))}
+
+<br>
+
+<b>
+المتبقي:
+</b>
+
+${money(
+Number(c.projectValue||0)
+-
+customerPaid(c.name)
+)}
+
+</div>
+
+
+<h3>
+جدول الدفعات
+</h3>
+
+
+<div id="inst">
+
+${instRows(c.installments)}
+
+</div>
+
+
+<div class="actions no-print">
+
+<button
+class="btn secondary"
+onclick="addInst()"
+>
+
++ إضافة دفعة
+
+</button>
+
+
+<button
+class="btn"
+onclick="saveInst(${i})"
+>
+
+حفظ الدفعات
+
+</button>
+
+
+<button
+class="btn secondary"
+onclick="location.hash='customers'"
+>
+
+رجوع
+
+</button>
+
+</div>
+
+</div>
+
+`
+
+)
+
+}
+
+
+function instRows(a){
+
+const arr=
+a.length
+?
+a
+:
+[
+{
+amount:"",
+date:"",
+paid:false,
+note:""
+}
+];
+
+return arr
+.map(
+i=>`
+
+<div class="installment">
+
+<div class="field">
+
+<label>
+قيمة الدفعة
+</label>
+
+<input
+class="ia"
+type="number"
+step="0.001"
+value="${i.amount||""}"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+ميعاد الصرف
+</label>
+
+<input
+class="id"
+type="date"
+value="${esc(i.date||"")}"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+تم الصرف؟
+</label>
+
+<select class="ip">
+
+<option
+value="false"
+${!i.paid?"selected":""}
+>
+
+لا
+
+</option>
+
+<option
+value="true"
+${i.paid?"selected":""}
+>
+
+نعم
+
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+ملاحظات
+</label>
+
+<input
+class="in"
+value="${esc(i.note||"")}"
+>
+
+</div>
+
+
+<button
+class="btn danger no-print"
+onclick="this.parentElement.remove()"
+>
+
+حذف
+
+</button>
+
+</div>
+
+`
+)
+.join("")
+
+}
+
+
+function addInst(){
+
+document
+.getElementById("inst")
+.insertAdjacentHTML(
+"beforeend",
+instRows(
+[
+{
+amount:"",
+date:"",
+paid:false,
+note:""
+}
+]
+)
+)
+
+}
+
+
+function saveInst(i){
+
+db.customers[i].installments=
+
+[
+...document
+.querySelectorAll(
+"#inst .installment"
+)
+]
+.map(
+r=>({
+
+amount:Number(
+r.querySelector(".ia")
+.value||0
+),
+
+date:
+r.querySelector(".id")
+.value,
+
+paid:
+r.querySelector(".ip")
+.value==="true",
+
+note:
+r.querySelector(".in")
+.value
+
+})
+)
+.filter(
+x=>x.amount||x.date
+);
+
+save();
+
+openCustomer(i);
+
+alert(
+"تم حفظ جدول الدفعات"
+)
+
+}
+
+
+function receipts(){
+
+return shell(
+"سند قبض",
+
+`
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field suggest">
+
+<label>
+اسم العميل
+</label>
+
+<input
+id="rCustomer"
+autocomplete="off"
+placeholder="اكتب اسم العميل"
+>
+
+<div
+id="rs"
+class="suggestions"
+style="display:none"
+></div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+قيمة سند القبض
+</label>
+
+<input
+id="rAmount"
+type="number"
+min="0"
+step="0.001"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+التاريخ
+</label>
+
+<input
+id="rDate"
+type="date"
+value="${today()}"
+>
+
+</div>
+
+</div>
+
+
+<div
+id="rInfo"
+class="project-box"
+style="display:none"
+></div>
+
+
+<div
+class="actions no-print"
+style="margin-top:14px"
+>
+
+<button
+class="btn"
+onclick="saveReceipt()"
+>
+
+حفظ سند القبض
+
+</button>
+
+
+<button
+class="btn secondary"
+onclick="location.hash='dashboard'"
+>
+
+إلغاء
+
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="panel"
+style="margin-top:16px"
+>
+
+<h3>
+آخر سندات القبض
+</h3>
+
+${receiptTable(
+db.receipts
+.slice()
+.reverse()
+.slice(0,20)
+)}
+
+</div>
+
+`
+
+)
+
+}
+
+
+function bindReceipt(){
+
+const input=
+document.getElementById(
+"rCustomer"
+);
+
+const box=
+document.getElementById("rs");
+
+if(!input)
+return;
+
+
+function show(){
+
+const q=
+input.value
+.trim()
+.toLowerCase();
+
+const arr=
+db.customers.filter(
+c=>
+!q||
+c.name
+.toLowerCase()
+.includes(q)
+);
+
+box.innerHTML=
+
+arr.length
+
+?
+
+arr.map(
+(c,i)=>`
+
+<div
+onclick="chooseCustomer(${i})"
+>
+
+<b>
+${esc(c.name)}
+</b>
+
+<div class="muted">
+
+${esc(c.projectAddress)}
+
+—
+
+${money(c.projectValue)}
+
+—
+
+المتبقي
+
+${money(
+Number(c.projectValue||0)
+-
+customerPaid(c.name)
+)}
+
+</div>
+
+</div>
+
+`
+)
+.join("")
+
+:
+
+"<div>لا يوجد عميل</div>";
+
+box.style.display="block"
+
+}
+
+input.oninput=show;
+input.onfocus=show;
+
+document.addEventListener(
+"click",
+e=>{
+
+if(
+!e.target.closest(".suggest")
+)
+
+box.style.display="none"
+
+},
+{once:true}
+)
+
+}
+
+
+function chooseCustomer(i){
+
+const c=db.customers[i];
+
+document
+.getElementById("rCustomer")
+.value=c.name;
+
+document
+.getElementById("rs")
+.style.display="none";
+
+const paid=
+customerPaid(c.name);
+
+const rem=
+Number(c.projectValue||0)-paid;
+
+document
+.getElementById("rInfo")
+.style.display="block";
+
+document
+.getElementById("rInfo")
+.innerHTML=
+
+`
+
+<b>
+اسم العميل:
+</b>
+
+${esc(c.name)}
+
+<br>
+
+<b>
+اسم المشروع:
+</b>
+
+${esc(c.projectAddress)}
+
+<br>
+
+<b>
+قيمة المشروع:
+</b>
+
+${money(c.projectValue)}
+
+<br>
+
+<b>
+المدفوع:
+</b>
+
+${money(paid)}
+
+<br>
+
+<b>
+المتبقي:
+</b>
+
+${money(rem)}
+
+`
+
+}
+
+
+function saveReceipt(){
+
+const name=
+document
+.getElementById("rCustomer")
+.value
+.trim();
+
+const amount=
+Number(
+document
+.getElementById("rAmount")
+.value||0
+);
+
+const date=
+document
+.getElementById("rDate")
+.value||today();
+
+const c=
+db.customers.find(
+x=>x.name===name
+);
+
+if(!c)
+
+return alert(
+"اختر عميلًا مسجلًا"
+);
+
+const rem=
+Number(c.projectValue||0)
+-
+customerPaid(name);
+
+if(amount<=0)
+
+return alert(
+"أدخل قيمة سند القبض"
+);
+
+if(amount>rem)
+
+return alert(
+"قيمة سند القبض أكبر من المبلغ المتبقي"
+);
+
+const y=
+new Date(
+date+"T00:00:00"
+)
+.getFullYear();
+
+const no=
+nextNo(
+"receipt",
+y
+);
+
+const r={
+
+id:Date.now(),
+
+no,
+
+year:y,
+
+customer:name,
+
+project:c.projectAddress,
+
+projectValue:
+Number(c.projectValue),
+
+amount,
+
+date
+
+};
+
+db.receipts.push(r);
+
+db.ops.unshift({
+
+type:"receipt",
+
+no,
+
+year:y,
+
+party:name,
+
+amount,
+
+date,
+
+label:"سند قبض"
+
+});
+
+save();
+
+alert(
+"تم حفظ سند القبض رقم "+no
+);
+
+printReceipt(r)
+
+}
+
+
+function payments(){
+
+return shell(
+"سند صرف",
+
+`
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+
+<label>
+البيان / المستفيد
+</label>
+
+<input id="pParty">
+
+</div>
+
+
+<div class="field">
+
+<label>
+قيمة سند الصرف
+</label>
+
+<input
+id="pAmount"
+type="number"
+min="0"
+step="0.001"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+التاريخ
+</label>
+
+<input
+id="pDate"
+type="date"
+value="${today()}"
+>
+
+</div>
+
+</div>
+
+
+<div
+class="actions no-print"
+style="margin-top:14px"
+>
+
+<button
+class="btn"
+onclick="savePayment()"
+>
+
+حفظ سند الصرف
+
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="panel"
+style="margin-top:16px"
+>
+
+${paymentTable()}
+
+</div>
+
+`
+
+)
+
+}
+
+
+function savePayment(){
+
+const party=
+document
+.getElementById("pParty")
+.value
+.trim();
+
+const amount=
+Number(
+document
+.getElementById("pAmount")
+.value||0
+);
+
+const date=
+document
+.getElementById("pDate")
+.value||today();
+
+if(!party||amount<=0)
+
+return alert(
+"أدخل البيانات وقيمة السند"
+);
+
+const y=
+new Date(
+date+"T00:00:00"
+)
+.getFullYear();
+
+const no=
+nextNo(
+"payment",
+y
+);
+
+const p={
+
+id:Date.now(),
+
+no,
+
+year:y,
+
+party,
+
+amount,
+
+date
+
+};
+
+db.payments.push(p);
+
+db.ops.unshift({
+
+type:"payment",
+
+no,
+
+year:y,
+
+party,
+
+amount,
+
+date,
+
+label:"سند صرف"
+
+});
+
+save();
+
+alert(
+"تم حفظ سند الصرف رقم "+no
+)
+
+}
+
+
+function journal(){
+
+return shell(
+"القيود اليومية",
+
+`
+
+<div class="panel">
+
+${opsTable(db.ops)}
+
+</div>
+
+`
+
+)
+
+}
+
+
+function reports(){
+
+return shell(
+"التقارير",
+
+`
+
+<div class="cards no-print">
+
+<div class="card">
+
+<b>
+تقرير المشاريع
+</b>
+
+<div style="margin-top:10px">
+
+<button
+class="btn"
+onclick="printReport('projects')"
+>
+
+🖨️ طباعة
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<b>
+تقرير الدفعات
+</b>
+
+<div style="margin-top:10px">
+
+<button
+class="btn"
+onclick="printReport('installments')"
+>
+
+🖨️ طباعة
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<b>
+تقرير سندات القبض
+</b>
+
+<div style="margin-top:10px">
+
+<button
+class="btn"
+onclick="printReport('receipts')"
+>
+
+🖨️ طباعة
+
+</button>
+
 </div>
 
 </div>
@@ -656,1043 +2022,11 @@ style="margin-top:14px"
 <div class="card">
 
 <div class="label">
-إجمالي المبيعات
-</div>
-
-<div class="value">
-${money(s)}
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="label">
-إجمالي المشتريات
-</div>
-
-<div class="value">
-${money(p)}
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="label">
-المقبوضات
-</div>
-
-<div class="value">
-${money(r)}
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="label">
-المدفوعات
-</div>
-
-<div class="value">
-${money(x)}
-</div>
-
-</div>
-
-</div>
-
-
-<div class="grid">
-
-<div class="panel">
-
-<h3>
-آخر العمليات
-</h3>
-
-${opsTable(db.ops.slice(0,8))}
-
-</div>
-
-
-<div class="panel">
-
-<h3>
-دفعات لم يتم صرفها
-</h3>
-
-${dueTable(dueInstallments().slice(0,6))}
-
-</div>
-
-</div>
-
-`
-)
-
-}
-
-function sum(t){
-
-return db.ops
-.filter(o=>o.type===t)
-.reduce(
-(a,o)=>a+Number(o.amount||0),
-0
-)
-
-}
-
-function opsTable(arr){
-
-if(!arr.length)
-
-return `
-<div class="empty">
-لا توجد عمليات بعد
-</div>
-`;
-
-return `
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>التاريخ</th>
-<th>النوع</th>
-<th>الطرف</th>
-<th>المبلغ</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${arr.map(o=>`
-
-<tr>
-
-<td>${esc(o.date)}</td>
-
-<td>${esc(o.label)}</td>
-
-<td>${esc(o.party)}</td>
-
-<td>${money(o.amount)}</td>
-
-</tr>
-
-`).join("")}
-
-</tbody>
-
-</table>
-
-</div>
-
-`
-
-}
-
-function dueTable(arr){
-
-if(!arr.length)
-
-return `
-<div class="empty">
-لا توجد دفعات معلقة
-</div>
-`;
-
-return `
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>العميل</th>
-<th>المشروع</th>
-<th>الدفعة</th>
-<th>موعد الصرف</th>
-<th>الحالة</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${arr.map(i=>`
-
-<tr>
-
-<td>${esc(i.customer)}</td>
-
-<td>${esc(i.project)}</td>
-
-<td>${money(i.amount)}</td>
-
-<td>${esc(i.date||"-")}</td>
-
-<td>⏳ لم يتم</td>
-
-</tr>
-
-`).join("")}
-
-</tbody>
-
-</table>
-
-</div>
-
-`
-
-}
-
-function salesPage(){
-
-return page(
-"فاتورة مبيعات",
-
-`
-
-<div class="panel">
-
-<div class="form">
-
-<div class="field suggest">
-
-<label>
-اسم العميل
-</label>
-
-<input
-id="party"
-autocomplete="off"
-placeholder="اكتب اسم العميل"
->
-
-<div
-id="customerSuggestions"
-class="suggestions"
-style="display:none"
-></div>
-
-</div>
-
-
-<div class="field">
-
-<label>
-المبلغ
-</label>
-
-<input
-id="amount"
-type="number"
-min="0"
-step="0.001"
-placeholder="0.000"
->
-
-</div>
-
-</div>
-
-
-<div
-id="selectedProject"
-class="project-box"
-style="display:none"
-></div>
-
-
-<div
-class="actions no-print"
-style="margin-top:14px"
->
-
-<button
-class="btn"
-id="saveOp"
->
-حفظ الفاتورة
-</button>
-
-<button
-class="btn secondary"
-onclick="location.hash='dashboard'"
->
-إلغاء
-</button>
-
-</div>
-
-</div>
-
-`
-)
-
-}
-
-function formPage(type,title,partyLabel){
-
-return page(
-title,
-
-`
-
-<div class="panel">
-
-<div class="form">
-
-<div class="field">
-
-<label>
-${partyLabel}
-</label>
-
-<input
-id="party"
-placeholder="${partyLabel}"
->
-
-</div>
-
-
-<div class="field">
-
-<label>
-المبلغ
-</label>
-
-<input
-id="amount"
-type="number"
-min="0"
-step="0.001"
-placeholder="0.000"
->
-
-</div>
-
-</div>
-
-
-<div
-class="actions no-print"
-style="margin-top:14px"
->
-
-<button
-class="btn"
-id="saveOp"
->
-حفظ
-</button>
-
-<button
-class="btn secondary"
-onclick="location.hash='dashboard'"
->
-إلغاء
-</button>
-
-</div>
-
-</div>
-
-`
-)
-
-}
-
-function customersPage(){
-
-let arr=db.customers;
-
-return page(
-"العملاء والمشروعات",
-
-`
-
-<div class="panel">
-
-<div class="form three">
-
-<div class="field">
-
-<label>
-اسم العميل
-</label>
-
-<input id="pname">
-
-</div>
-
-
-<div class="field">
-
-<label>
-عنوان المشروع
-</label>
-
-<input id="projectAddress">
-
-</div>
-
-
-<div class="field">
-
-<label>
-قيمة المشروع
-</label>
-
-<input
-id="projectValue"
-type="number"
-min="0"
-step="0.001"
-placeholder="0.000"
->
-
-</div>
-
-</div>
-
-
-<div
-class="actions no-print"
-style="margin-top:14px"
->
-
-<button
-class="btn"
-id="savePerson"
->
-إضافة العميل والمشروع
-</button>
-
-</div>
-
-
-<div style="margin-top:20px">
-
-${
-arr.length?
-
-`
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>اسم العميل</th>
-<th>عنوان المشروع</th>
-<th>قيمة المشروع</th>
-<th>المدفوع</th>
-<th>المتبقي</th>
-<th>عدد الدفعات</th>
-<th>الإجراء</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${arr.map((c,idx)=>{
-
-let paid=
-(c.installments||[])
-.filter(i=>i.paid)
-.reduce(
-(a,i)=>a+Number(i.amount||0),
-0
-);
-
-return `
-
-<tr>
-
-<td>
-${esc(c.name)}
-</td>
-
-<td>
-${esc(c.projectAddress||"-")}
-</td>
-
-<td>
-${money(c.projectValue)}
-</td>
-
-<td>
-${money(paid)}
-</td>
-
-<td>
-${money(Number(c.projectValue||0)-paid)}
-</td>
-
-<td>
-${(c.installments||[]).length}
-</td>
-
-<td>
-
-<button
-class="btn secondary"
-onclick="openCustomer(${idx})"
->
-الدفعات
-</button>
-
-</td>
-
-</tr>
-
-`
-
-}).join("")}
-
-</tbody>
-
-</table>
-
-</div>
-
-`
-
-:
-
-`
-
-<div class="empty">
-لا توجد بيانات
-</div>
-
-`
-
-}
-
-</div>
-
-</div>
-
-`
-)
-
-}
-
-function openCustomer(idx){
-
-let c=db.customers[idx];
-
-document.getElementById("app").innerHTML=
-
-page(
-`دفعات: ${esc(c.name)}`,
-
-`
-
-<div class="panel">
-
-<div class="project-box">
-
-<b>
-عنوان المشروع:
-</b>
-
-${esc(c.projectAddress||"-")}
-
-&nbsp; | &nbsp;
-
-<b>
-قيمة المشروع:
-</b>
-
-${money(c.projectValue)}
-
-</div>
-
-
-<h3>
-جدول الدفعات
-</h3>
-
-
-<div id="installments">
-
-${installmentRows(c.installments||[])}
-
-</div>
-
-
-<div class="actions no-print">
-
-<button
-class="btn secondary"
-onclick="addInstallmentRow()"
->
-+ إضافة دفعة
-</button>
-
-<button
-class="btn"
-onclick="saveInstallments(${idx})"
->
-حفظ الدفعات
-</button>
-
-<button
-class="btn secondary"
-onclick="location.hash='customers'"
->
-رجوع
-</button>
-
-</div>
-
-</div>
-
-`
-)
-
-}
-
-function installmentRows(arr){
-
-let a=arr.length?
-arr:
-[
-{
-amount:"",
-date:"",
-paid:false
-}
-];
-
-return a.map((i,n)=>`
-
-<div
-class="installment-row"
-data-row="${n}"
->
-
-<div class="field">
-
-<label>
-قيمة الدفعة
-</label>
-
-<input
-class="i-amount"
-type="number"
-min="0"
-step="0.001"
-value="${Number(i.amount||0)||""}"
->
-
-</div>
-
-
-<div class="field">
-
-<label>
-ميعاد الصرف
-</label>
-
-<input
-class="i-date"
-type="date"
-value="${esc(i.date||"")}"
->
-
-</div>
-
-
-<div class="field">
-
-<label>
-تم الصرف؟
-</label>
-
-<select class="i-paid">
-
-<option
-value="false"
-${!i.paid?"selected":""}
->
-لا
-</option>
-
-<option
-value="true"
-${i.paid?"selected":""}
->
-نعم
-</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>
-ملاحظات
-</label>
-
-<input
-class="i-note"
-value="${esc(i.note||"")}"
->
-
-</div>
-
-
-<button
-class="btn danger no-print"
-type="button"
-onclick="this.parentElement.remove()"
->
-حذف
-</button>
-
-</div>
-
-`).join("")
-
-}
-
-function addInstallmentRow(){
-
-document
-.getElementById("installments")
-.insertAdjacentHTML(
-"beforeend",
-installmentRows([
-{
-amount:"",
-date:"",
-paid:false,
-note:""
-}
-])
-)
-
-}
-
-function saveInstallments(idx){
-
-let rows=[
-...document.querySelectorAll(
-"#installments .installment-row"
-)
-];
-
-db.customers[idx].installments=
-
-rows.map(r=>({
-
-amount:Number(
-r.querySelector(".i-amount").value||0
-),
-
-date:
-r.querySelector(".i-date").value,
-
-paid:
-r.querySelector(".i-paid").value==="true",
-
-note:
-r.querySelector(".i-note").value.trim()
-
-}))
-
-.filter(i=>i.amount||i.date);
-
-save();
-
-alert("تم حفظ الدفعات");
-
-openCustomer(idx)
-
-}
-
-function suppliers(){
-
-let arr=db.suppliers;
-
-return page(
-"الموردون",
-
-`
-
-<div class="panel">
-
-<div class="form">
-
-<div class="field">
-
-<label>
-اسم المورد
-</label>
-
-<input id="pname">
-
-</div>
-
-
-<div class="field">
-
-<label>
-الهاتف
-</label>
-
-<input id="phone">
-
-</div>
-
-</div>
-
-
-<div
-class="actions no-print"
-style="margin-top:14px"
->
-
-<button
-class="btn"
-id="savePerson"
->
-إضافة
-</button>
-
-</div>
-
-
-<div style="margin-top:18px">
-
-${
-arr.length?
-
-`
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>الاسم</th>
-<th>الهاتف</th>
-</tr>
-
-</thead>
-
-<tbody>
-
-${arr.map(p=>`
-
-<tr>
-
-<td>
-${esc(p.name)}
-</td>
-
-<td>
-${esc(p.phone||"-")}
-</td>
-
-</tr>
-
-`).join("")}
-
-</tbody>
-
-</table>
-
-</div>
-
-`
-
-:
-
-`
-
-<div class="empty">
-لا توجد بيانات
-</div>
-
-`
-
-}
-
-</div>
-
-</div>
-
-`
-)
-
-}
-
-function reports(){
-
-let net=
-sum("sale")+
-sum("receipt")-
-sum("purchase")-
-sum("payment");
-
-return page(
-"التقارير",
-
-`
-
-<div class="cards no-print">
-
-<div class="card">
-
-<div class="label">
-تقرير المشاريع
-</div>
-
-<div
-class="actions"
-style="margin-top:12px"
->
-
-<button
-class="btn"
-onclick="printReport('projects')"
->
-🖨️ طباعة
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="label">
-تقرير الدفعات
-</div>
-
-<div
-class="actions"
-style="margin-top:12px"
->
-
-<button
-class="btn"
-onclick="printReport('payments')"
->
-🖨️ طباعة
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="label">
-تقرير المبيعات
-</div>
-
-<div
-class="actions"
-style="margin-top:12px"
->
-
-<button
-class="btn"
-onclick="printReport('sales')"
->
-🖨️ طباعة
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="label">
-تقرير المشتريات
-</div>
-
-<div
-class="actions"
-style="margin-top:12px"
->
-
-<button
-class="btn"
-onclick="printReport('purchases')"
->
-🖨️ طباعة
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="cards">
-
-<div class="card">
-
-<div class="label">
-صافي الحركة
-</div>
-
-<div class="value">
-${money(net)}
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="label">
 إجمالي المشاريع
 </div>
 
 <div class="value">
-${money(projectTotal())}
+${money(projectValue())}
 </div>
 
 </div>
@@ -1731,72 +2065,335 @@ class="panel"
 style="margin-top:16px"
 >
 
-${opsTable(db.ops)}
+${customerTable()}
 
 </div>
 
 `
+
 )
 
 }
 
-function reportContent(type){
 
-let title="";
+function receiptTable(a){
 
-if(type==="projects"){
+if(!a.length)
 
-title="تقرير المشاريع والعملاء";
+return`
 
-let rows=
+<div class="empty">
+لا توجد سندات قبض
+</div>
 
-db.customers
-.map(c=>{
+`;
 
-let paid=
-(c.installments||[])
-.filter(i=>i.paid)
-.reduce(
-(a,i)=>a+Number(i.amount||0),
-0
-);
+return`
 
-return `
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>رقم</th>
+<th>التاريخ</th>
+<th>العميل</th>
+<th>المشروع</th>
+<th>المبلغ</th>
+<th>طباعة</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${a.map(
+r=>`
 
 <tr>
 
 <td>
-${esc(c.name)}
+${r.no}/${r.year}
 </td>
 
 <td>
-${esc(c.projectAddress||"-")}
+${esc(r.date)}
 </td>
 
 <td>
-${money(c.projectValue)}
+${esc(r.customer)}
 </td>
 
 <td>
-${money(paid)}
+${esc(r.project)}
 </td>
 
 <td>
-${money(
-Number(c.projectValue||0)-paid
-)}
+${money(r.amount)}
+</td>
+
+<td>
+
+<button
+class="btn secondary"
+onclick='printReceipt(${JSON.stringify(r)})'
+>
+
+🖨️
+
+</button>
+
 </td>
 
 </tr>
 
 `
+)
+.join("")}
 
-})
-.join("");
+</tbody>
 
-return {
+</table>
 
-title,
+</div>
+
+`
+
+}
+
+
+function paymentTable(){
+
+if(!db.payments.length)
+
+return`
+
+<div class="empty">
+لا توجد سندات صرف
+</div>
+
+`;
+
+return`
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>رقم</th>
+<th>التاريخ</th>
+<th>المستفيد</th>
+<th>المبلغ</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${db.payments
+.slice()
+.reverse()
+.map(
+p=>`
+
+<tr>
+
+<td>
+${p.no}/${p.year}
+</td>
+
+<td>
+${esc(p.date)}
+</td>
+
+<td>
+${esc(p.party)}
+</td>
+
+<td>
+${money(p.amount)}
+</td>
+
+</tr>
+
+`
+)
+.join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`
+
+}
+
+
+function opsTable(a){
+
+if(!a.length)
+
+return`
+
+<div class="empty">
+لا توجد قيود
+</div>
+
+`;
+
+return`
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>التاريخ</th>
+<th>رقم</th>
+<th>البيان</th>
+<th>الطرف</th>
+<th>المبلغ</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${a.map(
+o=>`
+
+<tr>
+
+<td>
+${esc(o.date)}
+</td>
+
+<td>
+${o.no?o.no+"/"+o.year:"-"}
+</td>
+
+<td>
+${esc(o.label||o.type)}
+</td>
+
+<td>
+${esc(o.party)}
+</td>
+
+<td>
+${money(o.amount)}
+</td>
+
+</tr>
+
+`
+)
+.join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`
+
+}
+
+
+function installmentTable(a){
+
+if(!a.length)
+
+return`
+
+<div class="empty">
+لا توجد دفعات معلقة
+</div>
+
+`;
+
+return`
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>العميل</th>
+<th>المشروع</th>
+<th>القيمة</th>
+<th>الموعد</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${a.map(
+i=>`
+
+<tr>
+
+<td>
+${esc(i.customer)}
+</td>
+
+<td>
+${esc(i.project)}
+</td>
+
+<td>
+${money(i.amount)}
+</td>
+
+<td>
+${esc(i.date||"-")}
+</td>
+
+</tr>
+
+`
+)
+.join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`
+
+}
+
+
+function reportData(type){
+
+if(type==="projects")
+
+return{
+
+title:"تقرير المشاريع",
 
 html:`
 
@@ -1806,8 +2403,8 @@ html:`
 
 <tr>
 
-<th>اسم العميل</th>
-<th>عنوان المشروع</th>
+<th>العميل</th>
+<th>المشروع</th>
 <th>قيمة المشروع</th>
 <th>المدفوع</th>
 <th>المتبقي</th>
@@ -1818,16 +2415,45 @@ html:`
 
 <tbody>
 
-${
-rows||
-`
+${db.customers.map(
+c=>{
+
+const p=
+customerPaid(c.name);
+
+return`
+
 <tr>
-<td colspan="5">
-لا توجد بيانات
+
+<td>
+${esc(c.name)}
 </td>
+
+<td>
+${esc(c.projectAddress)}
+</td>
+
+<td>
+${money(c.projectValue)}
+</td>
+
+<td>
+${money(p)}
+</td>
+
+<td>
+${money(
+Number(c.projectValue)-p
+)}
+</td>
+
 </tr>
+
 `
+
 }
+)
+.join("")}
 
 </tbody>
 
@@ -1841,7 +2467,7 @@ rows||
 إجمالي المشاريع
 
 <b>
-${money(projectTotal())}
+${money(projectValue())}
 </b>
 
 </div>
@@ -1872,42 +2498,72 @@ ${money(remainingTotal())}
 
 `
 
-}
+};
 
-}
 
-if(type==="payments"){
+if(type==="installments"){
 
-title="تقرير الدفعات";
-
-let all=
-db.customers.flatMap(
+const a=
+db.customers
+.flatMap(
 c=>
 (c.installments||[])
-.map(i=>({
+.map(
+i=>({
+
 ...i,
+
 customer:c.name,
-project:c.projectAddress||""
-}))
+
+project:c.projectAddress
+
+})
+)
 );
 
-let paid=
-all
-.filter(i=>i.paid)
-.reduce(
-(a,i)=>a+Number(i.amount||0),
+const total=
+a.reduce(
+(x,i)=>
+x+Number(i.amount||0),
 0
 );
 
-let total=
-all
+const paid=
+a.filter(
+i=>i.paid
+)
 .reduce(
-(a,i)=>a+Number(i.amount||0),
+(x,i)=>
+x+Number(i.amount||0),
 0
 );
 
-let rows=
-all.map(i=>`
+return{
+
+title:"تقرير الدفعات",
+
+html:`
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>العميل</th>
+<th>المشروع</th>
+<th>القيمة</th>
+<th>ميعاد الصرف</th>
+<th>الحالة</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${a.map(
+i=>`
 
 <tr>
 
@@ -1933,42 +2589,9 @@ ${i.paid?"تم الصرف":"لم يتم"}
 
 </tr>
 
-`).join("");
-
-return {
-
-title,
-
-html:`
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>العميل</th>
-<th>المشروع</th>
-<th>قيمة الدفعة</th>
-<th>ميعاد الصرف</th>
-<th>الحالة</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${
-rows||
 `
-<tr>
-<td colspan="5">
-لا توجد دفعات
-</td>
-</tr>
-`
-}
+)
+.join("")}
 
 </tbody>
 
@@ -1990,7 +2613,7 @@ ${money(total)}
 
 <div class="mini">
 
-إجمالي المدفوع
+المصروف
 
 <b>
 ${money(paid)}
@@ -2001,7 +2624,7 @@ ${money(paid)}
 
 <div class="mini">
 
-إجمالي المتبقي
+المتبقي
 
 <b>
 ${money(total-paid)}
@@ -2017,135 +2640,41 @@ ${money(total-paid)}
 
 }
 
-if(type==="sales"||type==="purchases"){
+return{
 
-title=
-type==="sales"?
-"تقرير المبيعات":
-"تقرير المشتريات";
+title:"تقرير سندات القبض",
 
-let arr=
-db.ops.filter(
-o=>
-o.type===
-(
-type==="sales"?
-"sale":
-"purchase"
+html:
+
+receiptTable(
+db.receipts
+.slice()
+.reverse()
 )
-);
-
-let total=
-arr.reduce(
-(a,o)=>a+Number(o.amount||0),
-0
-);
-
-let rows=
-arr.map(o=>`
-
-<tr>
-
-<td>
-${esc(o.date)}
-</td>
-
-<td>
-${esc(o.party)}
-</td>
-
-<td>
-${money(o.amount)}
-</td>
-
-</tr>
-
-`).join("");
-
-return {
-
-title,
-
-html:`
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>التاريخ</th>
-<th>الطرف</th>
-<th>القيمة</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${
-rows||
-`
-<tr>
-<td colspan="3">
-لا توجد بيانات
-</td>
-</tr>
-`
-}
-
-</tbody>
-
-</table>
-
-
-<div class="totals">
-
-<div class="mini">
-
-الإجمالي
-
-<b>
-${money(total)}
-</b>
-
-</div>
-
-</div>
-
-`
 
 }
 
 }
 
-return {
-title:"التقرير",
-html:opsTable(db.ops)
-}
-
-}
 
 function printReport(type){
 
-let r=reportContent(type);
+const r=
+reportData(type);
 
-let w=window.open("","_blank");
+const w=
+window.open(
+"",
+"_blank"
+);
 
-if(!w){
+if(!w)
 
-alert(
+return alert(
 "اسمح بالنوافذ المنبثقة للطباعة"
 );
 
-return
-
-}
-
 w.document.write(`
-
-<!doctype html>
 
 <html
 lang="ar"
@@ -2163,32 +2692,32 @@ ${r.title}
 <style>
 
 body{
-font-family:Arial,Tahoma,sans-serif;
-padding:30px;
-color:#17212b
+font-family:Arial;
+padding:30px
 }
 
-h1{
+h1,
+h2{
 text-align:center
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:25px
+margin-top:20px
 }
 
 th,
 td{
-padding:10px;
 border:1px solid #ddd;
+padding:9px;
 text-align:right
 }
 
 .totals{
 display:flex;
 gap:12px;
-margin-top:20px
+margin-top:18px
 }
 
 .mini{
@@ -2201,14 +2730,6 @@ min-width:180px
 display:block;
 font-size:18px;
 margin-top:5px
-}
-
-@media print{
-
-.no-print{
-display:none
-}
-
 }
 
 </style>
@@ -2234,9 +2755,7 @@ ${r.html}
 
 <script>
 
-window.onload=function(){
-window.print()
-}
+window.onload=()=>window.print()
 
 <\/script>
 
@@ -2250,474 +2769,262 @@ w.document.close()
 
 }
 
-function render(){
 
-setActive();
+function printReceipt(r){
 
-let r=route(),
-html="";
-
-if(r==="dashboard")
-html=dashboard();
-
-else if(r==="sales")
-html=salesPage();
-
-else if(r==="purchases")
-html=formPage(
-"purchase",
-"فاتورة مشتريات",
-"اسم المورد"
+const w=
+window.open(
+"",
+"_blank"
 );
 
-else if(r==="receipts")
-html=formPage(
-"receipt",
-"سند قبض",
-"من العميل / الطرف"
+if(!w)
+
+return alert(
+"اسمح بالنوافذ المنبثقة للطباعة"
 );
 
-else if(r==="payments")
-html=formPage(
-"payment",
-"سند صرف",
-"إلى المورد / الطرف"
+const after=
+db.receipts
+.filter(
+x=>
+x.customer===r.customer&&
+x.id<=r.id
+)
+.reduce(
+(a,x)=>
+a+Number(x.amount||0),
+0
 );
 
-else if(r==="customers")
-html=customersPage();
+const rem=
+Number(r.projectValue||0)-after;
 
-else if(r==="suppliers")
-html=suppliers();
+w.document.write(`
 
-else if(r==="accounts")
-html=page(
-"دليل الحسابات",
-`
-<div class="panel">
-${accountsTable()}
-</div>
-`
-);
+<html
+lang="ar"
+dir="rtl"
+>
 
-else if(r==="journal")
-html=page(
-"القيود اليومية",
-`
-<div class="panel">
-${journalTable()}
-</div>
-`
-);
+<head>
 
-else if(r==="reports")
-html=reports();
+<meta charset="utf-8">
 
-else
-html=dashboard();
+<title>
+سند قبض ${r.no}
+</title>
 
-document.getElementById("app").innerHTML=html;
+<style>
 
-bind()
-
+body{
+font-family:Arial;
+padding:35px;
+color:#17212b
 }
 
-function bind(){
+.box{
+border:1px solid #ddd;
+padding:25px;
+max-width:700px;
+margin:auto
+}
 
-let r=route();
+h1{
+text-align:center
+}
 
-let b=document.getElementById("saveOp");
+p{
+font-size:17px;
+border-bottom:1px solid #eee;
+padding:9px
+}
 
-if(b)
+.sign{
+display:flex;
+justify-content:space-between;
+margin-top:60px
+}
 
-b.onclick=()=>{
+</style>
 
-let party=
-document.getElementById("party")
-.value
-.trim();
+</head>
 
-let amount=
-Number(
-document.getElementById("amount")
-.value
-);
+<body>
 
-if(!party||!amount)
+<div class="box">
 
-return alert(
-"أدخل الطرف والمبلغ"
-);
+<h1>
+Ayman Accounting
+</h1>
 
-let labels={
+<h2 style="text-align:center">
 
-sale:"فاتورة بيع",
+سند قبض رقم
+${r.no}/${r.year}
 
-purchase:"فاتورة شراء",
+</h2>
 
-receipt:"سند قبض",
-
-payment:"سند صرف"
-
-};
-
-db.ops.unshift({
-
-type:r,
-
-label:labels[r],
-
-party,
-
-amount,
-
-date:new Date().toLocaleString("ar-KW")
-
-});
-
-save();
-
-alert(
-"تم الحفظ بنجاح"
-);
-
-location.hash="dashboard"
-
-};
-
-
-let bp=document.getElementById("savePerson");
-
-if(bp)
-
-bp.onclick=()=>{
-
-let name=
-document.getElementById("pname")
-.value
-.trim();
-
-let address=
-document.getElementById("projectAddress")
-?.value
-.trim()||"";
-
-let value=
-Number(
-document.getElementById("projectValue")
-?.value||0
-);
-
-let phone=
-document.getElementById("phone")
-?.value
-.trim()||"";
-
-if(!name)
-
-return alert(
-"أدخل الاسم"
-);
-
-if(
-r==="customers"&&
-(!address||!value)
-)
-
-return alert(
-"أدخل عنوان المشروع وقيمة المشروع"
-);
-
-if(r==="customers")
-
-db.customers.push({
-
-name,
-
-projectAddress:address,
-
-projectValue:value,
-
-installments:[]
-
-});
-
-else
-
-db.suppliers.push({
-name,
-phone
-});
-
-save()
-
-};
-
-
-let input=
-document.getElementById("party");
-
-let box=
-document.getElementById(
-"customerSuggestions"
-);
-
-if(
-input&&
-box&&
-r==="sales"
-){
-
-function suggest(){
-
-let q=
-input.value
-.trim()
-.toLowerCase();
-
-let arr=
-db.customers.filter(
-c=>
-!q||
-c.name
-.toLowerCase()
-.includes(q)
-);
-
-box.innerHTML=
-
-arr.length?
-
-arr.map((c,i)=>`
-
-<div data-i="${i}">
+<p>
 
 <b>
-${esc(c.name)}
+التاريخ:
 </b>
 
-<div class="subtle">
+${esc(r.date)}
 
-${esc(
-c.projectAddress||
-"بدون عنوان مشروع"
-)}
+</p>
 
-—
-
-${money(c.projectValue)}
-
-</div>
-
-</div>
-
-`).join("")
-
-:
-
-`
-<div class='subtle'>
-لا يوجد عميل مسجل بهذا الاسم
-</div>
-`;
-
-box.style.display="block";
-
-box
-.querySelectorAll("[data-i]")
-.forEach(el=>
-
-el.onclick=()=>{
-
-let c=
-arr[
-Number(
-el.dataset.i
-)
-];
-
-input.value=c.name;
-
-box.style.display="none";
-
-document
-.getElementById(
-"selectedProject"
-)
-.style.display="block";
-
-document
-.getElementById(
-"selectedProject"
-)
-.innerHTML=`
+<p>
 
 <b>
-المشروع:
+اسم العميل:
 </b>
 
-${esc(c.projectAddress||"-")}
+${esc(r.customer)}
 
-&nbsp; | &nbsp;
+</p>
+
+<p>
+
+<b>
+اسم المشروع:
+</b>
+
+${esc(r.project)}
+
+</p>
+
+<p>
 
 <b>
 قيمة المشروع:
 </b>
 
-${money(c.projectValue)}
+${money(r.projectValue)}
 
-&nbsp; | &nbsp;
+</p>
+
+<p>
+
+<b>
+المدفوع قبل السند:
+</b>
+
+${money(
+after-Number(r.amount)
+)}
+
+</p>
+
+<p>
+
+<b>
+قيمة سند القبض:
+</b>
+
+${money(r.amount)}
+
+</p>
+
+<p>
+
+<b>
+إجمالي المدفوع بعد السند:
+</b>
+
+${money(after)}
+
+</p>
+
+<p>
 
 <b>
 المتبقي:
 </b>
 
-${money(
-Number(c.projectValue||0)-
-(
-(c.installments||[])
-.filter(i=>i.paid)
-.reduce(
-(a,i)=>a+Number(i.amount||0),
-0
-)
-)
-)}
+${money(rem)}
 
-`
+</p>
 
-}
+<div class="sign">
 
-)
+<span>
+توقيع المستلم: __________
+</span>
 
-}
-
-input.addEventListener(
-"input",
-suggest
-);
-
-input.addEventListener(
-"focus",
-suggest
-);
-
-document.addEventListener(
-"click",
-e=>{
-if(
-!e.target.closest(".suggest")
-)
-box.style.display="none"
-},
-{once:true}
-)
-
-}
-
-}
-
-function accountsTable(){
-
-let a=[
-
-["1000","الصندوق","أصل"],
-
-["1100","البنك","أصل"],
-
-["1200","العملاء","أصل"],
-
-["2000","الموردون","التزام"],
-
-["4000","المبيعات","إيراد"],
-
-["5000","المشتريات","تكلفة"],
-
-["6000","المصروفات","مصروف"]
-
-];
-
-return `
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>الكود</th>
-<th>الحساب</th>
-<th>النوع</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${a.map(x=>`
-
-<tr>
-
-<td>
-${x[0]}
-</td>
-
-<td>
-${x[1]}
-</td>
-
-<td>
-${x[2]}
-</td>
-
-</tr>
-
-`).join("")}
-
-</tbody>
-
-</table>
+<span>
+توقيع المسؤول: __________
+</span>
 
 </div>
 
-`
-
-}
-
-function journalTable(){
-
-if(!db.ops.length)
-
-return `
-
-<div class="empty">
-لا توجد قيود حتى الآن.
 </div>
 
-`;
 
-return opsTable(db.ops)
+<script>
+
+window.onload=()=>window.print()
+
+<\/script>
+
+</body>
+
+</html>
+
+`);
+
+w.document.close()
 
 }
 
-function esc(s){
 
-return String(s??"")
-.replace(
-/[&<>"']/g,
-c=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[c])
+function render(){
+
+const r=route();
+
+document
+.querySelectorAll("[data-r]")
+.forEach(
+a=>
+a.classList.toggle(
+"active",
+a.dataset.r===r
 )
+);
+
+let h;
+
+if(r==="dashboard")
+h=dashboard();
+
+else if(r==="customers")
+h=customers();
+
+else if(r==="receipts")
+h=receipts();
+
+else if(r==="payments")
+h=payments();
+
+else if(r==="journal")
+h=journal();
+
+else if(r==="reports")
+h=reports();
+
+else
+h=dashboard();
+
+document
+.getElementById("app")
+.innerHTML=h;
+
+if(r==="receipts")
+bindReceipt()
 
 }
+
 
 window.addEventListener(
 "hashchange",
