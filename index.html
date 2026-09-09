@@ -1,34 +1,1897 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>Ayman Accounting</title>
-<meta name="description" content="نظام محاسبي عربي">
-<link rel="stylesheet" href="assets/style.css">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+    background:#f4f6f8;
+    color:#17212b;
+}
+
+.layout{
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    right:0;
+    top:0;
+    bottom:0;
+    width:245px;
+    background:#17212b;
+    color:white;
+    padding:20px 14px;
+    z-index:10;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+    padding:10px;
+    margin-bottom:20px;
+}
+
+.logo span{
+    font-weight:400;
+}
+
+.logo small{
+    display:block;
+    color:#9eabb7;
+    font-size:12px;
+    margin-top:6px;
+}
+
+.nav a{
+    display:block;
+    color:#dce4ea;
+    text-decoration:none;
+    padding:13px;
+    border-radius:9px;
+    margin:3px 0;
+    transition:.2s;
+}
+
+.nav a:hover,
+.nav a.active{
+    background:#2d3d4c;
+    color:white;
+}
+
+.main{
+    margin-right:245px;
+    padding:22px;
+    min-height:100vh;
+}
+
+.topbar{
+    background:white;
+    border-radius:14px;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+    margin-bottom:20px;
+}
+
+.top-title{
+    font-size:20px;
+    font-weight:700;
+}
+
+.muted{
+    color:#74808c;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.currency{
+    background:#edf7ff;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    margin:8px 0 18px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.card{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.card-label{
+    color:#697783;
+    font-size:13px;
+}
+
+.card-value{
+    font-size:24px;
+    font-weight:800;
+    margin-top:10px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:16px;
+    margin-top:18px;
+}
+
+.panel{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.panel h3{
+    margin-top:0;
+}
+
+.form{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.field label{
+    display:block;
+    font-size:13px;
+    margin-bottom:6px;
+    color:#596673;
+}
+
+.field input,
+.field select{
+    width:100%;
+    padding:12px;
+    border:1px solid #d6dde3;
+    border-radius:8px;
+    font-size:15px;
+    background:white;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:16px;
+}
+
+.btn{
+    border:0;
+    border-radius:9px;
+    padding:11px 17px;
+    cursor:pointer;
+    background:#1769aa;
+    color:white;
+    font-size:14px;
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+.btn.green{
+    background:#27833f;
+}
+
+.btn.gray{
+    background:#e9eef2;
+    color:#26333e;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:12px 8px;
+    border-bottom:1px solid #edf0f2;
+    text-align:right;
+}
+
+th{
+    color:#687581;
+    font-size:13px;
+}
+
+.empty{
+    text-align:center;
+    padding:30px;
+    color:#7b8792;
+}
+
+.quick{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.quick a{
+    text-decoration:none;
+    text-align:center;
+}
+
+.notice{
+    padding:13px;
+    border-radius:9px;
+    background:#fff5d8;
+    margin-bottom:15px;
+    font-size:13px;
+}
+
+@media(max-width:850px){
+
+    .sidebar{
+        width:72px;
+        padding:14px 7px;
+    }
+
+    .logo{
+        font-size:0;
+        text-align:center;
+    }
+
+    .logo small{
+        display:none;
+    }
+
+    .nav a{
+        font-size:0;
+        text-align:center;
+        padding:14px 5px;
+    }
+
+    .nav a:first-letter{
+        font-size:21px;
+    }
+
+    .main{
+        margin-right:72px;
+        padding:14px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .form{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
+    }
+
+    .card{
+        padding:14px;
+    }
+
+    .card-value{
+        font-size:18px;
+    }
+
+    .panel{
+        padding:14px;
+    }
+
+}
+</style>
 </head>
+
 <body>
+
 <div class="layout">
+
+<!-- القائمة -->
 <aside class="sidebar">
-  <div class="brand">Ayman <span>Accounting</span><small>نظام محاسبي</small></div>
-  <nav id="nav">
-    <a href="#dashboard" data-route="dashboard">🏠 الرئيسية</a>
-    <a href="#sales" data-route="sales">🧾 المبيعات</a>
-    <a href="#purchases" data-route="purchases">🛒 المشتريات</a>
-    <a href="#receipts" data-route="receipts">💰 سند قبض</a>
-    <a href="#payments" data-route="payments">💸 سند صرف</a>
-    <a href="#customers" data-route="customers">👥 العملاء</a>
-    <a href="#suppliers" data-route="suppliers">🏢 الموردون</a>
-    <a href="#accounts" data-route="accounts">📒 دليل الحسابات</a>
-    <a href="#journal" data-route="journal">📓 القيود اليومية</a>
-    <a href="#reports" data-route="reports">📊 التقارير</a>
-  </nav>
-</aside>
-<main class="main">
-<header class="topbar"><div><strong>Ayman Accounting</strong><div class="muted">الإصدار 1.2 — نسخة تجريبية</div></div><span class="currency">د.ك</span></header>
-<div id="app"></div>
-</main>
+
+<div class="logo">
+Ayman <span>Accounting</span>
+<small>نظام محاسبي</small>
 </div>
-<script src="assets/app.js"></script>
+
+<nav class="nav">
+
+<a href="#dashboard">🏠 الرئيسية</a>
+
+<a href="#sales">🧾 المبيعات</a>
+
+<a href="#purchases">🛒 المشتريات</a>
+
+<a href="#receipts">💰 سند قبض</a>
+
+<a href="#payments">💸 سند صرف</a>
+
+<a href="#customers">👥 العملاء</a>
+
+<a href="#suppliers">🏢 الموردون</a>
+
+<a href="#accounts">📒 دليل الحسابات</a>
+
+<a href="#journal">📓 القيود اليومية</a>
+
+<a href="#reports">📊 التقارير</a>
+
+</nav>
+
+</aside>
+
+
+<!-- المحتوى -->
+
+<main class="main">
+
+<header class="topbar">
+
+<div>
+
+<div class="top-title">
+Ayman Accounting
+</div>
+
+<div class="muted">
+نظام محاسبي — النسخة التجريبية
+</div>
+
+</div>
+
+<div class="currency">
+الدينار الكويتي د.ك
+</div>
+
+</header>
+
+
+<!-- الرئيسية -->
+
+<section id="dashboard" class="page">
+
+<h1 class="page-title">
+لوحة التحكم
+</h1>
+
+<div class="cards">
+
+<div class="card">
+<div class="card-label">إجمالي المبيعات</div>
+<div class="card-value" id="totalSales">
+0.000 د.ك
+</div>
+</div>
+
+<div class="card">
+<div class="card-label">إجمالي المشتريات</div>
+<div class="card-value" id="totalPurchases">
+0.000 د.ك
+</div>
+</div>
+
+<div class="card">
+<div class="card-label">المقبوضات</div>
+<div class="card-value" id="totalReceipts">
+0.000 د.ك
+</div>
+</div>
+
+<div class="card">
+<div class="card-label">المدفوعات</div>
+<div class="card-value" id="totalPayments">
+0.000 د.ك
+</div>
+</div>
+
+</div>
+
+
+<div class="grid">
+
+<div class="panel">
+
+<h3>
+آخر العمليات
+</h3>
+
+<div id="recentOperations">
+<div class="empty">
+لا توجد عمليات حتى الآن
+</div>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+اختصارات
+</h3>
+
+<div class="quick">
+
+<a class="btn" href="#sales">
+فاتورة بيع
+</a>
+
+<a class="btn green" href="#purchases">
+فاتورة شراء
+</a>
+
+<a class="btn" href="#receipts">
+سند قبض
+</a>
+
+<a class="btn green" href="#payments">
+سند صرف
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- المبيعات -->
+
+<section id="sales" class="page">
+
+<h1 class="page-title">
+فاتورة مبيعات
+</h1>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+
+<label>
+اسم العميل
+</label>
+
+<input
+id="saleCustomer"
+placeholder="اسم العميل">
+
+</div>
+
+
+<div class="field">
+
+<label>
+المبلغ
+</label>
+
+<input
+id="saleAmount"
+type="number"
+step="0.001"
+placeholder="0.000">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn"
+onclick="saveTransaction('sale')">
+
+حفظ فاتورة البيع
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- المشتريات -->
+
+<section id="purchases" class="page">
+
+<h1 class="page-title">
+فاتورة مشتريات
+</h1>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+
+<label>
+اسم المورد
+</label>
+
+<input
+id="purchaseSupplier"
+placeholder="اسم المورد">
+
+</div>
+
+
+<div class="field">
+
+<label>
+المبلغ
+</label>
+
+<input
+id="purchaseAmount"
+type="number"
+step="0.001"
+placeholder="0.000">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn"
+onclick="saveTransaction('purchase')">
+
+حفظ فاتورة الشراء
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- سند قبض -->
+
+<section id="receipts" class="page">
+
+<h1 class="page-title">
+سند قبض
+</h1>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+
+<label>
+من العميل / الطرف
+</label>
+
+<input
+id="receiptParty"
+placeholder="اسم الطرف">
+
+</div>
+
+
+<div class="field">
+
+<label>
+المبلغ
+</label>
+
+<input
+id="receiptAmount"
+type="number"
+step="0.001"
+placeholder="0.000">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn"
+onclick="saveTransaction('receipt')">
+
+حفظ سند القبض
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- سند صرف -->
+
+<section id="payments" class="page">
+
+<h1 class="page-title">
+سند صرف
+</h1>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+
+<label>
+إلى المورد / الطرف
+</label>
+
+<input
+id="paymentParty"
+placeholder="اسم الطرف">
+
+</div>
+
+
+<div class="field">
+
+<label>
+المبلغ
+</label>
+
+<input
+id="paymentAmount"
+type="number"
+step="0.001"
+placeholder="0.000">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn"
+onclick="saveTransaction('payment')">
+
+حفظ سند الصرف
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- العملاء -->
+
+<section id="customers" class="page">
+
+<h1 class="page-title">
+العملاء
+</h1>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+
+<label>
+اسم العميل
+</label>
+
+<input id="customerName">
+
+</div>
+
+
+<div class="field">
+
+<label>
+رقم الهاتف
+</label>
+
+<input id="customerPhone">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn"
+onclick="addCustomer()">
+
+إضافة عميل
+
+</button>
+
+</div>
+
+
+<div style="margin-top:20px">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+الاسم
+</th>
+
+<th>
+الهاتف
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="customersTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- الموردون -->
+
+<section id="suppliers" class="page">
+
+<h1 class="page-title">
+الموردون
+</h1>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+
+<label>
+اسم المورد
+</label>
+
+<input id="supplierName">
+
+</div>
+
+
+<div class="field">
+
+<label>
+رقم الهاتف
+</label>
+
+<input id="supplierPhone">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn"
+onclick="addSupplier()">
+
+إضافة مورد
+
+</button>
+
+</div>
+
+
+<div style="margin-top:20px">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+الاسم
+</th>
+
+<th>
+الهاتف
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="suppliersTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- دليل الحسابات -->
+
+<section id="accounts" class="page">
+
+<h1 class="page-title">
+دليل الحسابات
+</h1>
+
+<div class="panel">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+الكود
+</th>
+
+<th>
+الحساب
+</th>
+
+<th>
+النوع
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>1000</td>
+<td>الصندوق</td>
+<td>أصل</td>
+</tr>
+
+<tr>
+<td>1100</td>
+<td>البنك</td>
+<td>أصل</td>
+</tr>
+
+<tr>
+<td>1200</td>
+<td>العملاء</td>
+<td>أصل</td>
+</tr>
+
+<tr>
+<td>2000</td>
+<td>الموردون</td>
+<td>التزام</td>
+</tr>
+
+<tr>
+<td>4000</td>
+<td>المبيعات</td>
+<td>إيراد</td>
+</tr>
+
+<tr>
+<td>5000</td>
+<td>المشتريات</td>
+<td>تكلفة</td>
+</tr>
+
+<tr>
+<td>6000</td>
+<td>المصروفات</td>
+<td>مصروف</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- القيود اليومية -->
+
+<section id="journal" class="page">
+
+<h1 class="page-title">
+القيود اليومية
+</h1>
+
+<div class="panel">
+
+<div id="journalTable">
+
+<div class="empty">
+لا توجد قيود مسجلة
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- التقارير -->
+
+<section id="reports" class="page">
+
+<h1 class="page-title">
+التقارير
+</h1>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="card-label">
+صافي الحركة
+</div>
+
+<div
+class="card-value"
+id="netProfit">
+
+0.000 د.ك
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-label">
+عدد العمليات
+</div>
+
+<div
+class="card-value"
+id="operationCount">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel" style="margin-top:18px">
+
+<h3>
+سجل العمليات
+</h3>
+
+<div id="reportsTable">
+
+<div class="empty">
+لا توجد عمليات
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<script>
+
+/* =========================
+   قاعدة البيانات المحلية
+========================= */
+
+const STORAGE_KEY = "ayman_accounting_v2";
+
+let data = {
+
+transactions: [],
+
+customers: [],
+
+suppliers: []
+
+};
+
+
+function loadData(){
+
+try{
+
+const saved =
+localStorage.getItem(STORAGE_KEY);
+
+if(saved){
+
+data = JSON.parse(saved);
+
+}
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+function saveData(){
+
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(data)
+);
+
+}
+
+
+/* =========================
+   أدوات
+========================= */
+
+function money(value){
+
+return Number(value || 0)
+.toFixed(3) + " د.ك";
+
+}
+
+
+function escapeHTML(text){
+
+return String(text || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function total(type){
+
+return data.transactions
+
+.filter(x => x.type === type)
+
+.reduce(
+(sum,item) =>
+sum + Number(item.amount),
+0
+);
+
+}
+
+
+/* =========================
+   حفظ العمليات
+========================= */
+
+function saveTransaction(type){
+
+let party = "";
+let amount = 0;
+
+
+if(type === "sale"){
+
+party =
+document.getElementById(
+"saleCustomer"
+).value.trim();
+
+amount =
+Number(
+document.getElementById(
+"saleAmount"
+).value
+);
+
+}
+
+
+if(type === "purchase"){
+
+party =
+document.getElementById(
+"purchaseSupplier"
+).value.trim();
+
+amount =
+Number(
+document.getElementById(
+"purchaseAmount"
+).value
+);
+
+}
+
+
+if(type === "receipt"){
+
+party =
+document.getElementById(
+"receiptParty"
+).value.trim();
+
+amount =
+Number(
+document.getElementById(
+"receiptAmount"
+).value
+);
+
+}
+
+
+if(type === "payment"){
+
+party =
+document.getElementById(
+"paymentParty"
+).value.trim();
+
+amount =
+Number(
+document.getElementById(
+"paymentAmount"
+).value
+);
+
+}
+
+
+if(!party){
+
+alert("من فضلك أدخل اسم الطرف");
+
+return;
+
+}
+
+
+if(!amount || amount <= 0){
+
+alert("من فضلك أدخل مبلغًا صحيحًا");
+
+return;
+
+}
+
+
+const labels = {
+
+sale:"فاتورة بيع",
+
+purchase:"فاتورة شراء",
+
+receipt:"سند قبض",
+
+payment:"سند صرف"
+
+};
+
+
+data.transactions.unshift({
+
+id:Date.now(),
+
+type:type,
+
+label:labels[type],
+
+party:party,
+
+amount:amount,
+
+date:new Date().toLocaleString("ar-KW")
+
+});
+
+
+saveData();
+
+clearTransactionForm(type);
+
+render();
+
+alert("تم حفظ العملية بنجاح");
+
+location.hash="dashboard";
+
+}
+
+
+function clearTransactionForm(type){
+
+const fields={
+
+sale:["saleCustomer","saleAmount"],
+
+purchase:["purchaseSupplier","purchaseAmount"],
+
+receipt:["receiptParty","receiptAmount"],
+
+payment:["paymentParty","paymentAmount"]
+
+};
+
+
+fields[type].forEach(id=>{
+
+const element =
+document.getElementById(id);
+
+if(element){
+
+element.value="";
+
+}
+
+});
+
+}
+
+
+/* =========================
+   العملاء
+========================= */
+
+function addCustomer(){
+
+const name =
+document.getElementById(
+"customerName"
+).value.trim();
+
+const phone =
+document.getElementById(
+"customerPhone"
+).value.trim();
+
+
+if(!name){
+
+alert("أدخل اسم العميل");
+
+return;
+
+}
+
+
+data.customers.push({
+
+name:name,
+
+phone:phone
+
+});
+
+
+saveData();
+
+document.getElementById(
+"customerName"
+).value="";
+
+document.getElementById(
+"customerPhone"
+).value="";
+
+render();
+
+}
+
+
+/* =========================
+   الموردون
+========================= */
+
+function addSupplier(){
+
+const name =
+document.getElementById(
+"supplierName"
+).value.trim();
+
+const phone =
+document.getElementById(
+"supplierPhone"
+).value.trim();
+
+
+if(!name){
+
+alert("أدخل اسم المورد");
+
+return;
+
+}
+
+
+data.suppliers.push({
+
+name:name,
+
+phone:phone
+
+});
+
+
+saveData();
+
+document.getElementById(
+"supplierName"
+).value="";
+
+document.getElementById(
+"supplierPhone"
+).value="";
+
+render();
+
+}
+
+
+/* =========================
+   العمليات
+========================= */
+
+function operationsTable(list){
+
+if(!list.length){
+
+return `
+<div class="empty">
+لا توجد عمليات حتى الآن
+</div>
+`;
+
+}
+
+
+return `
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>التاريخ</th>
+
+<th>العملية</th>
+
+<th>الطرف</th>
+
+<th>المبلغ</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${list.map(item => `
+
+<tr>
+
+<td>
+${escapeHTML(item.date)}
+</td>
+
+<td>
+${escapeHTML(item.label)}
+</td>
+
+<td>
+${escapeHTML(item.party)}
+</td>
+
+<td>
+${money(item.amount)}
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+`;
+
+}
+
+
+/* =========================
+   تحديث الواجهة
+========================= */
+
+function render(){
+
+const sales =
+total("sale");
+
+const purchases =
+total("purchase");
+
+const receipts =
+total("receipt");
+
+const payments =
+total("payment");
+
+
+document.getElementById(
+"totalSales"
+).textContent =
+money(sales);
+
+
+document.getElementById(
+"totalPurchases"
+).textContent =
+money(purchases);
+
+
+document.getElementById(
+"totalReceipts"
+).textContent =
+money(receipts);
+
+
+document.getElementById(
+"totalPayments"
+).textContent =
+money(payments);
+
+
+const net =
+sales +
+receipts -
+purchases -
+payments;
+
+
+document.getElementById(
+"netProfit"
+).textContent =
+money(net);
+
+
+document.getElementById(
+"operationCount"
+).textContent =
+data.transactions.length;
+
+
+document.getElementById(
+"recentOperations"
+).innerHTML =
+operationsTable(
+data.transactions.slice(0,8)
+);
+
+
+document.getElementById(
+"reportsTable"
+).innerHTML =
+operationsTable(
+data.transactions
+);
+
+
+renderCustomers();
+
+renderSuppliers();
+
+renderJournal();
+
+}
+
+
+/* =========================
+   العملاء
+========================= */
+
+function renderCustomers(){
+
+const table =
+document.getElementById(
+"customersTable"
+);
+
+
+if(!data.customers.length){
+
+table.innerHTML=`
+
+<tr>
+
+<td colspan="2"
+style="text-align:center">
+
+لا توجد بيانات
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+table.innerHTML =
+data.customers.map(customer => `
+
+<tr>
+
+<td>
+${escapeHTML(customer.name)}
+</td>
+
+<td>
+${escapeHTML(customer.phone || "-")}
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+/* =========================
+   الموردون
+========================= */
+
+function renderSuppliers(){
+
+const table =
+document.getElementById(
+"suppliersTable"
+);
+
+
+if(!data.suppliers.length){
+
+table.innerHTML=`
+
+<tr>
+
+<td colspan="2"
+style="text-align:center">
+
+لا توجد بيانات
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+table.innerHTML =
+data.suppliers.map(supplier => `
+
+<tr>
+
+<td>
+${escapeHTML(supplier.name)}
+</td>
+
+<td>
+${escapeHTML(supplier.phone || "-")}
+</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+/* =========================
+   القيود
+========================= */
+
+function renderJournal(){
+
+const box =
+document.getElementById(
+"journalTable"
+);
+
+
+if(!data.transactions.length){
+
+box.innerHTML=`
+
+<div class="empty">
+
+لا توجد قيود مسجلة
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+box.innerHTML=`
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>التاريخ</th>
+
+<th>البيان</th>
+
+<th>مدين</th>
+
+<th>دائن</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${data.transactions.map(item => {
+
+let debit="";
+
+let credit="";
+
+
+if(item.type==="sale"){
+
+debit="العملاء";
+
+credit="المبيعات";
+
+}
+
+else if(item.type==="purchase"){
+
+debit="المشتريات";
+
+credit="الموردون";
+
+}
+
+else if(item.type==="receipt"){
+
+debit="الصندوق";
+
+credit="العملاء";
+
+}
+
+else if(item.type==="payment"){
+
+debit="الموردون";
+
+credit="الصندوق";
+
+}
+
+
+return `
+
+<tr>
+
+<td>
+${escapeHTML(item.date)}
+</td>
+
+<td>
+${escapeHTML(item.label)}
+ - ${escapeHTML(item.party)}
+</td>
+
+<td>
+${debit}
+<br>
+${money(item.amount)}
+</td>
+
+<td>
+${credit}
+<br>
+${money(item.amount)}
+</td>
+
+</tr>
+
+`;
+
+}).join("")}
+
+</tbody>
+
+</table>
+
+`;
+
+}
+
+
+/* =========================
+   التنقل بين الصفحات
+========================= */
+
+function showPage(){
+
+let hash =
+location.hash.replace("#","");
+
+
+if(!hash){
+
+hash="dashboard";
+
+}
+
+
+document.querySelectorAll(
+".page"
+).forEach(page => {
+
+page.classList.remove("active");
+
+});
+
+
+const page =
+document.getElementById(hash);
+
+
+if(page){
+
+page.classList.add("active");
+
+}else{
+
+document.getElementById(
+"dashboard"
+).classList.add("active");
+
+hash="dashboard";
+
+}
+
+
+document.querySelectorAll(
+".nav a"
+).forEach(link => {
+
+link.classList.toggle(
+"active",
+link.getAttribute("href")
+.replace("#","") === hash
+);
+
+});
+
+}
+
+
+window.addEventListener(
+"hashchange",
+showPage
+);
+
+
+window.addEventListener(
+"DOMContentLoaded",
+function(){
+
+loadData();
+
+render();
+
+showPage();
+
+}
+);
+
+</script>
+
 </body>
 </html>
