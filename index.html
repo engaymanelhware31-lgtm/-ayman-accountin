@@ -374,6 +374,7 @@ function prepareEmployeeNumber(){
   const el=document.getElementById('eNumber');
   if(el && !el.value) el.value=nextEmployeeNumber();
 }
+
 async function loadAll(){
  try{
   await api('/health');
